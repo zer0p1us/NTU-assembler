@@ -19,6 +19,8 @@ ADDI|D|12
 MOVEI|C|12
 BZ|FE|8
 
+**Please see ISA.md for full documentation of supported instructions**
+
 where:
 - instruction is the assembly instruction
 - opcode is the machine code for the instruction
