@@ -17,3 +17,18 @@ where:
 - instruction is the assembly instruction
 - opcode is the machine code for the instruction
 - operand_bit_size is the size of the operand, (may be removed in the future to be computed at runtime)
+
+
+CDM file format:
+
+```
+0 : C00C
+1 : DFF4
+2 : D00C
+3 : FE00
+4 : E001
+5 : E000
+```
+
+- first number (base 10) indicates the memory cell of the instructions
+- second number (base 16) indicates the machine code instruction, it has both opcode and operand imbedded within it
