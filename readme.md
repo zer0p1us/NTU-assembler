@@ -39,7 +39,8 @@ JMP 0
 ```
 
 - the opcode followed by operand
-- currently operand can only be in base 10, but base 16 support will come
+- 0x will indicate a base 16 number and will be included as is
+- lack of 0x will indicate a base 10 number
 - operand uses two's complement, size depends from instructions, can very from 4, 8 or 12 bits
 - if instruction is not recognised it will be prompted and the output file will have the instruction has presented
 
