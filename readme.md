@@ -26,7 +26,7 @@ where:
 - opcode is the machine code for the instruction
 - operand_bit_size is the size of the operand, (may be removed in the future to be computed at runtime)
 
-### Assemble
+### Assembly
 
 the following is an example of valid assemble code, the code is not doing anything specifically, it's simply display purposes.
 
