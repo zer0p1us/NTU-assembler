@@ -18,7 +18,6 @@ def read_ISA():
     with open("./ISA.csv", 'r', newline='') as ISA_file:
         reader = csv.DictReader(ISA_file)
         for row in reader:
-            # print(row)
             ISA[row['instruction']] = [row['opcode'], row['operand_bit_size']]
         ISA_file.close()
     return ISA
