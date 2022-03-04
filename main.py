@@ -29,7 +29,7 @@ def generate_machine_code(assembly, machine_code, ISA):
             continue
 
         if (line.split(' ', 1)[0] not in ISA):
-            print(line.partition(' ')[0] + " machine_code is instruction has not been implemented")
+            print(line.split(' ', 1)[0] + " machine_code is instruction has not been implemented")
             machine_code.append(line)
         else:
             operand = line.split(' ')[1]
