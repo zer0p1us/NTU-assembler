@@ -32,13 +32,27 @@ def generate_machine_code(assembly, machine_code, ISA):
             print(line.split(' ', 1)[0] + " instruction has not been implemented")
             machine_code.append(line)
         else:
-            operand = line.split(' ')[1]
+
+            try:
+                operand = line.split(' ')[1]
+            except IndexError as e: # check for no operand
+                operand = ""
             opcode = ISA[line.split(' ', 1)[0]][0]
-            operand_bit_size = ISA[line.split(' ', 1)[0]][1]
-            if operand[:2].lower() == "0x":
-                machine_code.append(opcode + operand[2:len(operand)-1])
-            else:
-                machine_code.append(opcode + to_hex(int(operand), int(operand_bit_size)))
+
+            if (len(opcode) <= 3):
+                # check for operand size
+                operand_bit_size = ISA[line.split(' ', 1)[0]][1]
+
+                # check if operand is already in hex
+                if operand[:2].lower() == "0x":
+                    # add operand to machine code as is
+                    machine_code.append(opcode + operand[2:len(operand)-1])
+                else:
+                    machine_code.append(opcode + to_hex(int(operand), int(operand_bit_size)))
+
+            # if there is no operand add opcode to machine code
+            elif (len(opcode) == 4):
+                machine_code.append(opcode)
             debug_output(machine_code)
 
 
