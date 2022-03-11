@@ -52,7 +52,7 @@ def generate_machine_code(assembly, machine_code, ISA):
                 # check if operand is already in hex
                 if operand[:2].lower() == "0x":
                     # add operand to machine code as is
-                    machine_code.append(opcode + operand[2:len(operand)])
+                    machine_code.append(opcode + format_operand(operand[2:len(operand)], operand_bit_size/4))
                 else:
                     machine_code.append(opcode + to_hex(int(operand), operand_bit_size))
 
