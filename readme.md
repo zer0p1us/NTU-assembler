@@ -31,7 +31,7 @@ where:
 the following is an example of valid assemble code, the code is not doing anything specifically, it's simply display purposes.
 
 ```
-MOVEI 12
+MOVEI 12 ; loading base_10 12 into accumulator
 ADDI -12
 ADDI 12
 BZ 0
@@ -43,6 +43,7 @@ JMP 0
 - lack of 0x will indicate a base 10 number
 - operand uses two's complement, size depends from instructions, can very from 4, 8 or 12 bits
 - if instruction is not recognised it will be prompted and the output file will have the instruction has presented
+- anything followed by ';' will be treated as comments
 
 ### CDM file format:
 
