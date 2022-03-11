@@ -47,14 +47,14 @@ def generate_machine_code(assembly, machine_code, ISA):
 
             if (len(opcode) <= 3):
                 # check for operand size
-                operand_bit_size = ISA[line.split(' ', 1)[0]][1]
+                operand_bit_size = int(ISA[line.split(' ', 1)[0]][1])
 
                 # check if operand is already in hex
                 if operand[:2].lower() == "0x":
                     # add operand to machine code as is
                     machine_code.append(opcode + operand[2:len(operand)])
                 else:
-                    machine_code.append(opcode + to_hex(int(operand), int(operand_bit_size)))
+                    machine_code.append(opcode + to_hex(int(operand), operand_bit_size))
 
             # if there is no operand add opcode to machine code
             elif (len(opcode) == 4):
