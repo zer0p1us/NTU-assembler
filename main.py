@@ -5,9 +5,15 @@ DEBUG = True
 def to_hex(val, nbits = 12):
     hex_value = hex((val + (1 << nbits)) % (1 << nbits))[2:].upper()
     operand_size = nbits/4
-    while (len(hex_value) != operand_size):
-        hex_value = '0' + hex_value
-    return hex_value
+    # make the final operand the required size
+    return format_operand(hex_value, operand_size)
+
+# check if operand is the correct size
+# if not add leadind zeros to comply
+def format_operand(operand, nbits):
+    while (len(operand) != nbits):
+        operand = '0' + operand
+    return operand
 
 def debug_output(machine_code):
     if DEBUG:
