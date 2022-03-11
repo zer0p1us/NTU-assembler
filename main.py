@@ -78,6 +78,7 @@ def main():
     machine_code = []
     generate_machine_code(assembly, machine_code, ISA)
 
+    # write machine code to CDM file
     machine_code_file = open('machine_code.cdm', 'w')
     for (instruction_mem, instruction) in enumerate(machine_code):
         machine_code_file.writelines(str(instruction_mem) + ' : ' + instruction + '\n')
