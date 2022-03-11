@@ -62,8 +62,9 @@ def main():
     try:
         assembly_file = open(file_name, 'r')
         assembly = assembly_file.readlines()
-        assembly = [line.rstrip('\n') for line in assembly]
         assembly_file.close()
+        # removing comments, new line & trailing whitespaces if present
+        for i in range(len(assembly)): assembly[i] = assembly[i].split(';')[0].rstrip('\n').rstrip(' ') if ';' in assembly[i] else assembly[i].rstrip('\n').rstrip(' ')
     except:
         print("File {0} could not be found or opened".format(file_name))
         exit()
