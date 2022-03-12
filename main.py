@@ -2,16 +2,15 @@ import csv
 
 DEBUG = True
 
-def to_hex(val, nbits = 12):
+def to_hex(val, hexBits):
+    nbits = hexBits * 4
     hex_value = hex((val + (1 << nbits)) % (1 << nbits))[2:].upper()
-    operand_size = nbits/4
-    # make the final operand the required size
-    return format_operand(hex_value, operand_size)
+    return format_operand(hex_value, hexBits)
 
 # check if operand is the correct size
 # if not add leadind zeros to comply
-def format_operand(operand, nbits):
-    while (len(operand) != nbits):
+def format_operand(operand, hexBits):
+    while (len(operand) != hexBits):
         operand = '0' + operand
     return operand
 
@@ -24,7 +23,7 @@ def read_ISA():
     with open("./ISA.csv", 'r', newline='') as ISA_file:
         reader = csv.DictReader(ISA_file)
         for row in reader:
-            ISA[row['instruction']] = [row['opcode'], row['operand_bit_size']]
+            ISA[row['instruction']] = row['opcode']
         ISA_file.close()
     return ISA
 
@@ -39,22 +38,17 @@ def generate_machine_code(assembly, machine_code, ISA):
             machine_code.append(line)
         else:
 
-            try:
-                operand = line.split(' ')[1]
-            except IndexError as e: # check for no operand
-                operand = ""
-            opcode = ISA[line.split(' ', 1)[0]][0]
+            opcode = ISA[line.split(' ', 1)[0]]
+            operand_hex_size = 4 - len(opcode) # compute size of operand in hex
+            operand = line.split(' ')[1] if operand_hex_size > 0 else ""
 
             if (len(opcode) <= 3):
-                # check for operand size
-                operand_bit_size = int(ISA[line.split(' ', 1)[0]][1])
-
                 # check if operand is already in hex
                 if operand[:2].lower() == "0x":
                     # add operand to machine code as is
-                    machine_code.append(opcode + format_operand(operand[2:len(operand)], operand_bit_size/4))
+                    machine_code.append(opcode + format_operand(operand[2:len(operand)], operand_hex_size))
                 else:
-                    machine_code.append(opcode + to_hex(int(operand), operand_bit_size))
+                    machine_code.append(opcode + to_hex(int(operand), operand_hex_size))
 
             # if there is no operand add opcode to machine code
             elif (len(opcode) == 4):

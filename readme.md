@@ -12,19 +12,18 @@ Write assembly to plain text file, no specific file extension is necessary, the 
 
 All instructions are in the ISA.csv file in the following format:
 
-instruction | opcode | operand_bit_size
---|--|--
-JMP|E|12
-ADDI|D|12
-MOVEI|C|12
-BZ|FE|8
+instruction | opcode
+|--|--|
+JMP|E
+ADDI|D
+MOVEI|C
+BZ|FE
 
 **Please see ISA.md for full documentation of supported instructions**
 
 where:
 - instruction is the assembly instruction
 - opcode is the machine code for the instruction
-- operand_bit_size is the size of the operand, (may be removed in the future to be computed at runtime)
 
 ### Assembly
 
