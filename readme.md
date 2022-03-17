@@ -6,7 +6,9 @@ assembler for NTU processor built in ceder logic this project will output a .cdm
 
 ### how to use
 
-Write assembly to plain text file, no specific file extension is necessary, the program will output a 'machine_code.cdm' file with the assembled code ready for use in cdm
+Write assembly to plain text file, no specific file extension is necessary, the program will output a 'machine_code.cdm' file with the assembled code ready for use in ceder logic
+
+The Processor.cdl file is a Ceder logic processor with all the implemented instructions and can load the .cmd files
 
 ### instructions set
 
