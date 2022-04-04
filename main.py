@@ -73,7 +73,7 @@ def main():
     generate_machine_code(assembly, machine_code, ISA)
 
     # write machine code to CDM file
-    machine_code_file = open('machine_code.cdm', 'w')
+    machine_code_file = open(file_name[:file_name.rindex('\\')+1] + file_name[file_name.rindex('\\'):]+'.cdm', 'w')
     for (instruction_mem, instruction) in enumerate(machine_code):
         machine_code_file.writelines(str(instruction_mem) + ' : ' + instruction + '\n')
     machine_code_file.close()
