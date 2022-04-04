@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(NTU_assembler VERSION 0.1.0)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+IF(CMAKE_COMPILER_IS_GNUCC) # add compiler optimisation when using GCC
+    set($CMAKE_CXX_FLAGS_RELEASE "$CMAKE_CXX_FLAGS_RELEASE -O3")
+ENDIF(CMAKE_COMPILER_IS_GNUCC)
+
+# looking for source files and header
+message("-- Looking for source and header files")
+file(GLOB src
+    "src/*.hpp"
+    "src/*.cpp")
+
+message("-- Adding executable")
+add_executable(${PROJECT_NAME} ${src})
+
+# adding header dir for libraries
+message("-- Adding include directory")
+include_directories(${CMAKE_SOURCE_DIR}/include/)
