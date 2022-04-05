@@ -14,7 +14,11 @@ std::string format_operand(std::string operand, int hexBits){
     return operand;
 }
 
-void debug_output(std::vector<std::string> *machine_code);
+void debug_output(std::vector<std::string> *machine_code){
+    #ifdef DEBUG
+        std::cout << machine_code->size() << " : " << machine_code->at(machine_code->size()-1) << '\n';
+    #endif
+}
 
 
 std::map<std::string, std::string> read_ISA();
