@@ -9,7 +9,10 @@
 
 std::string to_hex(int val, int hexBits);
 
-std::string format_operand(std::string operand, int hexBits);
+std::string format_operand(std::string operand, int hexBits){
+    while (operand.size() != hexBits){ operand = '0' + operand; }
+    return operand;
+}
 
 void debug_output(std::vector<std::string> *machine_code);
 
