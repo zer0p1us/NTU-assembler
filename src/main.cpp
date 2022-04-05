@@ -23,7 +23,33 @@ void debug_output(std::vector<std::string> *machine_code){
 
 std::map<std::string, std::string> read_ISA();
 
-void generate_machine_code(std::vector<std::string> *assembly, std::vector<std::string> *machine_code, std::map<std::string, std::string> *ISA);
+void generate_machine_code(std::vector<std::string> *assembly, std::vector<std::string> *machine_code, std::map<std::string, std::string> *ISA){
+    for (std::string line : *assembly){
+        std::string opcode = line.substr(0, line.find(' '));
+
+        // check if opcode is valid
+        if (*ISA->find(opcode) == *ISA->end()){ // if opcode is invalid
+            std::cout << opcode + " instruction has not been implemented" << '\n';
+            machine_code->push_back(line);
+        } else { // if opcode is valid
+
+            uint8_t operand_hex_size = 4 - opcode.size();
+            std::string operand = (operand_hex_size > 0) ? line.substr(1, line.find(' ')) : "";
+
+            if (opcode.size() <= 3){
+                if (operand.substr(0, 1) == "0x"){
+                    machine_code->push_back(opcode + format_operand(operand.substr(2, operand.size()), operand_hex_size));
+                }else{
+                    machine_code->push_back(opcode + to_hex(std::stoi(operand), operand_hex_size));
+                }
+            }else{
+                machine_code->push_back(opcode);
+            }
+            debug_output(&*machine_code);
+
+        }
+    }
+}
 
 int main(int argc, char const *argv[]) {
     // will be read from a CSV file eventually
