@@ -1,13 +1,25 @@
 #include <iostream>
 #include <map>
+#include <sstream>
 #include <string>
 #include <fstream>
 #include <vector>
+#include <iomanip>
 
 #define DEBUG
 
 
-std::string to_hex(int val, int hexBits);
+/* TODO:
+    - read_ISA()
+    - save machine_code to file
+*/
+
+std::string to_hex(int val, int hexBits){
+    int nbits = hexBits * 4;
+    std::stringstream stream;
+    stream << std::hex << val;
+    return stream.str();
+}
 
 std::string format_operand(std::string operand, int hexBits){
     while (operand.size() != hexBits){ operand = '0' + operand; }
