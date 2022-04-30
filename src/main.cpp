@@ -46,6 +46,7 @@ void generate_machine_code(std::vector<std::string> *assembly, std::vector<std::
         } else { // if opcode is valid
             opcode = ISA->at(opcode);
             int operand_hex_size = 4 - opcode.length();
+            std::string operand = (operand_hex_size > 0) ? line.substr(line.find(' '), line.length()) : "";
             if (opcode.size() <= 3){
                 if (operand.substr(0, 1) == "0x"){
                     machine_code->push_back(opcode + format_operand(operand.substr(2, operand.length()), operand_hex_size));
