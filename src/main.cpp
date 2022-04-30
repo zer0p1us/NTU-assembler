@@ -44,6 +44,7 @@ void generate_machine_code(std::vector<std::string> *assembly, std::vector<std::
             std::cout << opcode + " instruction has not been implemented" << '\n';
             machine_code->push_back(line);
         } else { // if opcode is valid
+            opcode = ISA->at(opcode);
             int operand_hex_size = 4 - opcode.length();
             if (opcode.size() <= 3){
                 if (operand.substr(0, 1) == "0x"){
