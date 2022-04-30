@@ -44,13 +44,10 @@ void generate_machine_code(std::vector<std::string> *assembly, std::vector<std::
             std::cout << opcode + " instruction has not been implemented" << '\n';
             machine_code->push_back(line);
         } else { // if opcode is valid
-
-            uint8_t operand_hex_size = 4 - opcode.size();
-            std::string operand = (operand_hex_size > 0) ? line.substr(1, line.find(' ')) : "";
-
+            int operand_hex_size = 4 - opcode.length();
             if (opcode.size() <= 3){
                 if (operand.substr(0, 1) == "0x"){
-                    machine_code->push_back(opcode + format_operand(operand.substr(2, operand.size()), operand_hex_size));
+                    machine_code->push_back(opcode + format_operand(operand.substr(2, operand.length()), operand_hex_size));
                 }else{
                     machine_code->push_back(opcode + to_hex(std::stoi(operand), operand_hex_size));
                 }
