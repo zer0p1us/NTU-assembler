@@ -70,7 +70,7 @@ std::string to_hex(int val, int hexBits){
     int nbits = hexBits * 4;
     std::stringstream stream;
     stream << std::hex << val;
-    return stream.str();
+    return format_operand(stream.str(), hexBits);
 }
 
 std::string format_operand(std::string operand, int hexBits){
