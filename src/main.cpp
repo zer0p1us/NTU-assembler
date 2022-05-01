@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 
 #define DEBUG
 
@@ -75,6 +76,7 @@ std::string to_hex(int val, int hexBits){
 
 std::string format_operand(std::string operand, int hexBits){
     while (operand.length() != hexBits){ operand = '0' + operand; }
+    std::transform(operand.begin(), operand.end(), operand.begin(), toupper);
     return operand;
 }
 
