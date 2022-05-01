@@ -48,6 +48,7 @@ void generate_machine_code(std::vector<std::string> *assembly, std::vector<std::
             int operand_hex_size = 4 - opcode.length();
             std::string operand = (operand_hex_size > 0) ? line.substr(line.find(' ')+1, line.length()) : ""; // take operand if present, also +1 is necessary to remove leading space
             if (opcode.length() <= 3){
+                if (operand.find("0x") != std::string::npos){ // if operand is given as hex
                     machine_code->push_back(opcode + format_operand(operand.substr(2, operand.length()), operand_hex_size));
                 }else{
                     machine_code->push_back(opcode + to_hex(std::stoi(operand), operand_hex_size));
