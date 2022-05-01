@@ -14,6 +14,8 @@
     - save machine_code to file
 */
 
+typedef std::vector<std::string> str_vector;
+typedef std::map<std::string, std::string> dictionary;
 std::string to_hex(int val, int hexBits){
     int nbits = hexBits * 4;
     std::stringstream stream;
@@ -26,16 +28,14 @@ std::string format_operand(std::string operand, int hexBits){
     return operand;
 }
 
-void debug_output(std::vector<std::string> *machine_code){
+void debug_output(str_vector *machine_code){
     #ifdef DEBUG
         std::cout << machine_code->size() << " : " << machine_code->at(machine_code->size()-1) << '\n';
     #endif
 }
 
 
-std::map<std::string, std::string> read_ISA();
-
-void generate_machine_code(std::vector<std::string> *assembly, std::vector<std::string> *machine_code, std::map<std::string, std::string> *ISA){
+void generate_machine_code(str_vector *assembly, str_vector *machine_code, dictionary *ISA){
     for (std::string line : *assembly){
         std::string opcode = line.substr(0, line.find(' '));
 
