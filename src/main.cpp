@@ -16,6 +16,14 @@
 
 typedef std::vector<std::string> str_vector;
 typedef std::map<std::string, std::string> dictionary;
+
+std::string to_hex(int val, int hexBits);
+std::string format_operand(std::string, int);
+dictionary read_ISA();
+void debug_output(str_vector *machine_code);
+void generate_machine_code(str_vector *assembly, str_vector *machine_code, dictionary *ISA);
+
+
 std::string to_hex(int val, int hexBits){
     int nbits = hexBits * 4;
     std::stringstream stream;
