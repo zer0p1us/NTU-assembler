@@ -22,7 +22,7 @@ std::string to_hex(int val, int hexBits){
 }
 
 std::string format_operand(std::string operand, int hexBits){
-    while (operand.size() != hexBits){ operand = '0' + operand; }
+    while (operand.length() != hexBits){ operand = '0' + operand; }
     return operand;
 }
 
