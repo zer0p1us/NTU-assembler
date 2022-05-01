@@ -68,9 +68,9 @@ int main(int argc, char const *argv[]) {
 }
 std::string to_hex(int val, int hexBits){
     int nbits = hexBits * 4;
-    std::stringstream stream;
-    stream << std::hex << val;
-    return format_operand(stream.str(), hexBits);
+    std::stringstream hex;
+    hex << std::hex << val;
+    return format_operand(hex.str(), hexBits);
 }
 
 std::string format_operand(std::string operand, int hexBits){
