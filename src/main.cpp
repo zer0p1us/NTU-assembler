@@ -74,7 +74,15 @@ std::string to_hex(int val, int hexBits){
 }
 
 std::string format_operand(std::string operand, int hexBits){
-    while (operand.length() != hexBits){ operand = '0' + operand; }
+    while (operand.length() != hexBits){
+        operand = '0' + operand;
+        // check if operand is bigger than it should
+        // if not done an infinite loop will accure
+        if (operand.length() > hexBits) {
+            std::cerr << "[Err]: operand seems bigger than legal size" << "\n";
+            return operand.substr(1, operand.length()); // remove zero
+        }
+    }
     std::transform(operand.begin(), operand.end(), operand.begin(), toupper);
     return operand;
 }
