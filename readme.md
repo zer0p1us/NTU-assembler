@@ -6,7 +6,7 @@ assembler for NTU processor built in ceder logic this project will output a .cdm
 
 ### how to use
 
-Write assembly to plain text file, no specific file extension is necessary, the program will output a 'machine_code.cdm' file with the assembled code ready for use in ceder logic
+Write assembly to plain text file, no specific file extension is necessary, the program will ask for the assembly file in question and output a 'machine_code.cdm' file with the assembled code ready for use in ceder logic
 
 The Processor.cdl file is a Ceder logic processor with all the implemented instructions and can load the .cmd files
 
@@ -34,9 +34,10 @@ the following is an example of valid assemble code, the code is not doing anythi
 ```
 MOVEI 12 ; loading base_10 12 into accumulator
 ADDI -12
-ADDI 12
+ADDI 0x012 ; adding base_16 12 to accumulator
 BZ 0
 JMP 0
+NOP
 ```
 
 - the opcode followed by operand
@@ -45,6 +46,7 @@ JMP 0
 - operand uses two's complement, size depends from instructions, can very from 4, 8 or 12 bits
 - if instruction is not recognised it will be prompted and the output file will have the instruction has presented
 - anything followed by ';' will be treated as comments
+- NOP or any unimplemented and will be prompted to the user and the program will continue onwards
 
 ### CDM file format:
 
@@ -55,7 +57,9 @@ JMP 0
 3 : FE00
 4 : E001
 5 : E000
+6 : NOP
 ```
 
 - first number (base 10) indicates the memory cell of the instructions
 - second number (base 16) indicates the machine code instruction, it has both opcode and operand imbedded within it
+- 6th shows that error opcodes will be left as is 
