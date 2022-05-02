@@ -7,11 +7,8 @@
 #include <iomanip>
 #include <algorithm>
 
-#define DEBUG
-
 
 /* TODO:
-    - read_ISA()
     - save machine_code to file
 */
 
