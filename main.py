@@ -12,6 +12,11 @@ def to_hex(val, hexBits):
 def format_operand(operand, hexBits):
     while (len(operand) != hexBits):
         operand = '0' + operand
+        # check if operand is bigger than it should
+        # if not done an infinite loop will accure
+        if (len(operand) > hexBits):
+            print("[Err]: operand seems bigger than legal size\n")
+            return operand[1:len(operand)] # remove zero
     return operand
 
 def debug_output(machine_code):
