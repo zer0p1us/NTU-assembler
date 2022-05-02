@@ -74,6 +74,9 @@ int main(int argc, char const *argv[]) {
 std::string to_hex(int val, int hexBits){
     std::stringstream hex;
     hex << std::hex << val;
+    // check if the the hex output is bigger which happens when negative
+    // anything that goes above the operand size count will be erased
+    if (hex.str().length() > hexBits) { return format_operand(hex.str().substr(hex.str().length()-hexBits, hex.str().length()-1), hexBits); }
     return format_operand(hex.str(), hexBits);
 }
 
@@ -84,7 +87,7 @@ std::string format_operand(std::string operand, int hexBits){
         // if not done an infinite loop will accure
         if (operand.length() > hexBits) {
             std::cerr << "[Err]: operand seems bigger than legal size" << "\n";
-            operand = operand.substr(operand.length()-hexBits, operand.length()-1); // remove zero
+            operand = operand.substr(1, operand.length()-1); // remove zero
             continue;
         }
     }
