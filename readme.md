@@ -32,12 +32,14 @@ where:
 the following is an example of valid assemble code, the code is not doing anything specifically, it's simply display purposes.
 
 ```
-MOVEI 12 ; loading base_10 12 into accumulator
-ADDI -12
-ADDI 0x012 ; adding base_16 12 to accumulator
-BZ 0
-JMP 0
-NOP
+Start:
+MOVEI 12 ; move immediate 12 into ACC
+BNZ SUB ; branch to SUB if ACC is not zero
+
+SUB:
+ADDI -1 ; sub 1 from ACC
+BNZ SUB ; if not zero go back to start of "subroutine"
+BZ Start ; if ACC becomes zero go back to MOVEI
 ```
 
 - the opcode followed by operand
@@ -46,20 +48,20 @@ NOP
 - operand uses two's complement, size depends from instructions, can very from 4, 8 or 12 bits
 - if instruction is not recognised it will be prompted and the output file will have the instruction has presented
 - anything followed by ';' will be treated as comments
-- NOP or any unimplemented and will be prompted to the user and the program will continue onwards
+- any unimplemented and will be prompted to the user and the program will continue onwards
+- any line ending with ':' will be considered a label and relative addressing will be computer for any branching instruction that may make use if it
 
 ### CDM file format:
 
 ```
 0 : C00C
-1 : DFF4
-2 : D00C
-3 : FE00
-4 : E001
-5 : E000
-6 : NOP
+1 : FD00
+2 : DFFF
+3 : FDFE
+4 : FEFB
+5 : NOP
 ```
 
 - first number (base 10) indicates the memory cell of the instructions
 - second number (base 16) indicates the machine code instruction, it has both opcode and operand imbedded within it
-- 6th shows that error opcodes will be left as is 
+- 5th shows that error opcodes will be left as is
