@@ -27,19 +27,18 @@ void generate_machine_code(str_vector *assembly, str_vector *machine_code, dicti
 
 int main(int argc, char const *argv[]) {
     // will be read from a CSV file eventually
-    dictionary ISA = {{"JMP","E"},
-                                        {"ADDI","D"},
-                                        {"MOVEI","C"},
-                                        {"MOVE","B"},
-                                        {"STORE","A"},
-                                        {"LDA","9"},
-                                        {"LDSP","8"},
-                                        {"BZ","FE"},
-                                        {"BNZ","FD"},
-                                        {"STA","FFFF"},
-                                        {"STA+","FFFE"},
-                                        {"MOVE(A)","FFFD"},
-                                        {"MOVE(A)+","FFFC"},};
+    std::cout << "\n"
+<< "@@@@@@@@  @@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@@     @@@  @@@  @@@   @@@@@@   \n"
+<< "@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@@@  @@@@@@@@   @@@@  @@@  @@@  @@@@@@@   \n"
+<< "     @@!  @@!       @@!  @@@  @@!   @@@@  @@!  @@@  @@@!!  @@!  @@@  !@@       \n"
+<< "    !@!   !@!       !@!  @!@  !@!  @!@!@  !@!  @!@    !@!  !@!  @!@  !@!       \n"
+<< "   @!!    @!!!:!    @!@!!@!   @!@ @! !@!  @!@@!@!     @!@  @!@  !@!  !!@@!!    \n"
+<< "  !!!     !!!!!:    !!@!@!    !@!!!  !!!  !!@!!!      !@!  !@!  !!!   !!@!!!   \n"
+<< " !!:      !!:       !!: :!!   !!:!   !!!  !!:         !!:  !!:  !!!       !:!  \n"
+<< ":!:       :!:       :!:  !:!  :!:    !:!  :!:         :!:  :!:  !:!      !:!   \n"
+<< " :: ::::   :: ::::  ::   :::  ::::::: ::   ::         :::  ::::: ::  :::: ::   \n"
+<< ": :: : :  : :: ::    :   : :   : : :  :    :           ::   : :  :   :: : :    \n";
+
     std::string file_name;
     std::cout << "Please enter the filename of the assembly source: ";
     std::cin >> file_name;
