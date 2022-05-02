@@ -54,9 +54,11 @@ int main(int argc, char const *argv[]) {
             if (line.empty()) continue;
             assembly.push_back(line);
         }
+        // check if assembly dic is empty
+        // if so either file was not found or was empty
+        if (assembly.size() == 0){ std::cout << file_name << " could not be opened or was empty" << '\n'; return 0; }
     }
-    catch(const std::exception& e)
-    {
+    catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
         return -1;
     }
