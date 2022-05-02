@@ -8,10 +8,6 @@
 #include <algorithm>
 
 
-/* TODO:
-    - save machine_code to file
-*/
-
 typedef std::vector<std::string> str_vector;
 typedef std::map<std::string, std::string> dictionary;
 
