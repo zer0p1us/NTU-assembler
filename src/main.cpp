@@ -66,7 +66,13 @@ int main(int argc, char const *argv[]) {
     str_vector machine_code;
     generate_machine_code(&assembly, &machine_code, &ISA);
 
-
+    std::ofstream machine_code_file;
+    machine_code_file.open(file_name + ".cdm");
+    int index = 0;
+    for (std::string line : machine_code){
+        machine_code_file << index++ << " : " <<  line << '\n';
+    }
+    machine_code_file.close();
     return 0;
 }
 std::string to_hex(int val, int hexBits){
