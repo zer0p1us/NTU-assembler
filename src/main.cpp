@@ -103,7 +103,6 @@ dictionary read_ISA(){
         key = line.substr(0, index);
         data = line.substr(index+1, line.length()-1);
         ISA[key] = data;
-        std::cout << "the key: " << key << " has been read as: " << data << '\n';
     }
     return ISA;
 }
