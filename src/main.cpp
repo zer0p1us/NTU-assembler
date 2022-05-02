@@ -72,7 +72,6 @@ int main(int argc, char const *argv[]) {
     return 0;
 }
 std::string to_hex(int val, int hexBits){
-    int nbits = hexBits * 4;
     std::stringstream hex;
     hex << std::hex << val;
     return format_operand(hex.str(), hexBits);
