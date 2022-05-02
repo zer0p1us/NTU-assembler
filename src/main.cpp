@@ -26,7 +26,7 @@ void generate_machine_code(str_vector *assembly, str_vector *machine_code, dicti
 
 
 int main(int argc, char const *argv[]) {
-    // will be read from a CSV file eventually
+
     std::cout << "\n"
 << "@@@@@@@@  @@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@@     @@@  @@@  @@@   @@@@@@   \n"
 << "@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@@@  @@@@@@@@   @@@@  @@@  @@@  @@@@@@@   \n"
@@ -39,6 +39,7 @@ int main(int argc, char const *argv[]) {
 << " :: ::::   :: ::::  ::   :::  ::::::: ::   ::         :::  ::::: ::  :::: ::   \n"
 << ": :: : :  : :: ::    :   : :   : : :  :    :           ::   : :  :   :: : :    \n";
 
+    dictionary ISA = read_ISA();
     std::string file_name;
     std::cout << "Please enter the filename of the assembly source: ";
     std::cin >> file_name;
