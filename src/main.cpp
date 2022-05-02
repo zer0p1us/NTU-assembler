@@ -79,6 +79,26 @@ std::string format_operand(std::string operand, int hexBits){
     return operand;
 }
 
+dictionary read_ISA(){
+    std::ifstream f_ISA("ISA.csv", std::ios::in);
+    if (!f_ISA.is_open()){
+        std::cout << "[Err]:couldn't read ISA.csv file containing ISA specification!" << '\n';
+    }
+    std::string line;
+    dictionary ISA;
+    int index;
+    std::string key;
+    std::string data;
+    while (getline(f_ISA, line)){
+        index = line.find(",");
+        key = line.substr(0, index);
+        data = line.substr(index+1, line.length()-1);
+        ISA[key] = data;
+        std::cout << "the key: " << key << " has been read as: " << data << '\n';
+    }
+    return ISA;
+}
+
 void debug_output(str_vector *machine_code){
     #ifdef DEBUG
         std::cout << machine_code->size() << " : " << machine_code->at(machine_code->size()-1) << '\n';
