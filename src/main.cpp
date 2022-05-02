@@ -116,6 +116,21 @@ dictionary read_ISA(){
 }
 
 void generate_machine_code(str_vector *assembly, str_vector *machine_code, dictionary *ISA){
+    int line_num = 0;
+    dictionary labels;
+    // pre-processing
+    // find and store
+    for (std::string line : *assembly){
+        std::string label = line;
+        if (label.find(':') != std::string::npos){
+            labels[line.substr(0, line.length()-1)] = std::to_string(line_num);
+            str_vector::iterator label_line = assembly->begin() + line_num;
+            *assembly->erase(label_line);
+        }
+        line_num++;
+    }
+    line_num = 1;
+
     for (std::string line : *assembly){
         std::string opcode = line.substr(0, line.find(' '));
 
@@ -130,14 +145,19 @@ void generate_machine_code(str_vector *assembly, str_vector *machine_code, dicti
             if (opcode.length() <= 3){
                 if (operand.find("0x") != std::string::npos){ // if operand is given as hex
                     machine_code->push_back(opcode + format_operand(operand.substr(2, operand.length()), operand_hex_size));
-                }else{
-                    machine_code->push_back(opcode + to_hex(std::stoi(operand), operand_hex_size));
+                } else {
+                    if (labels.find(operand) == labels.end()) { // not label
+                        machine_code->push_back(opcode + to_hex(std::stoi(operand), operand_hex_size));
+                    } else { // with label
+                        machine_code->push_back(opcode + to_hex(std::stoi(labels.at(operand)) - (line_num), operand_hex_size));
+
+                    }
                 }
             }else{
                 machine_code->push_back(opcode);
             }
-            std::cout << machine_code->size() << " : " << machine_code->at(machine_code->size()-1) << '\n';
-
+            std::cout << line_num << " : " << machine_code->at(machine_code->size()-1) << '\n';
+            line_num++;
         }
     }
 }
