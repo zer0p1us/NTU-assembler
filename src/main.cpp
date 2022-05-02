@@ -99,13 +99,6 @@ dictionary read_ISA(){
     return ISA;
 }
 
-void debug_output(str_vector *machine_code){
-    #ifdef DEBUG
-        std::cout << machine_code->size() << " : " << machine_code->at(machine_code->size()-1) << '\n';
-    #endif
-}
-
-
 void generate_machine_code(str_vector *assembly, str_vector *machine_code, dictionary *ISA){
     for (std::string line : *assembly){
         std::string opcode = line.substr(0, line.find(' '));
@@ -127,7 +120,7 @@ void generate_machine_code(str_vector *assembly, str_vector *machine_code, dicti
             }else{
                 machine_code->push_back(opcode);
             }
-            debug_output(&*machine_code);
+            std::cout << machine_code->size() << " : " << machine_code->at(machine_code->size()-1) << '\n';
 
         }
     }
