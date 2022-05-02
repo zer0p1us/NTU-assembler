@@ -20,3 +20,8 @@ add_executable(${PROJECT_NAME} ${src})
 # adding header dir for libraries
 message("-- Adding include directory")
 include_directories(${CMAKE_SOURCE_DIR}/include/)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+    "${CMAKE_SOURCE_DIR}/ISA.csv"
+    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
