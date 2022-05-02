@@ -51,8 +51,8 @@ int main(int argc, char const *argv[]) {
         std::string line;
         while (assembly_file.good()) {
             std::getline(assembly_file, line);
-            if (line.empty()) continue;
-            assembly.push_back(line);
+            if (line.empty() || line[0] == ';') continue;
+            assembly.push_back(line.substr(0, line.find(';')-1));
         }
         // check if assembly dic is empty
         // if so either file was not found or was empty
