@@ -95,7 +95,8 @@ std::string format_operand(std::string operand, int hexBits){
 dictionary read_ISA(){
     std::ifstream f_ISA("ISA.csv", std::ios::in);
     if (!f_ISA.is_open()){
-        std::cout << "[Err]:couldn't read ISA.csv file containing ISA specification!" << '\n';
+        std::cout << "[Err]: couldn't read ISA.csv file containing ISA specification!" << '\n';
+        std::cout << "[Resolution]: please place the ISA.csv file in the same directory as the executable" << '\n';
     }
     std::string line;
     dictionary ISA;
