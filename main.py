@@ -34,6 +34,15 @@ def read_ISA():
 
 
 def generate_machine_code(assembly, machine_code, ISA):
+    line_num = 0;
+    labels = {}
+    for (list_line_num, line) in enumerate(assembly):
+        if (':' in line):
+            labels[line[0:len(line)-1]] = line_num
+            del assembly[list_line_num]
+        line_num =+ 1
+    line_num = 1
+
     for line in assembly:
         if line.isspace():
             continue
@@ -53,13 +62,16 @@ def generate_machine_code(assembly, machine_code, ISA):
                     # add operand to machine code as is
                     machine_code.append(opcode + format_operand(operand[2:len(operand)], operand_hex_size))
                 else:
-                    machine_code.append(opcode + to_hex(int(operand), operand_hex_size))
+                    if (operand in labels):
+                        machine_code.append(opcode + to_hex((labels[operand] - line_num), operand_hex_size))
+                    else:
+                        machine_code.append(opcode + to_hex(int(operand), operand_hex_size))
 
             # if there is no operand add opcode to machine code
             elif (len(opcode) == 4):
                 machine_code.append(opcode)
             debug_output(machine_code)
-
+        line_num=+1
 
 def main():
     print("\n" +
