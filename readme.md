@@ -1,4 +1,4 @@
-# NTU assembler
+# NTU assembler ⚙️
 
 **IMPORTANT**: if you wish to use this please make sure that the opcode for the instructions in the ISA.csv file are correct for your processor and modify them if necessary
 
